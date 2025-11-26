@@ -22,7 +22,7 @@ A Bash utility to "factory reset" the Incidents and Indicators (TIM) database on
 
 1.  Download the script to your XSOAR server:
     ```bash
-    wget [https://raw.githubusercontent.com/YOUR_USERNAME/REPO_NAME/main/ResetXSOARDB.sh](https://raw.githubusercontent.com/YOUR_USERNAME/REPO_NAME/main/ResetXSOARDB.sh)
+    wget [https://raw.githubusercontent.com/mattheweharding/cortex-xsoar6-scripts/refs/heads/main/ResetXSOARDB.sh](https://raw.githubusercontent.com/mattheweharding/cortex-xsoar6-scripts/refs/heads/main/ResetXSOARDB.sh)
     ```
     *(Or create the file manually and paste the content).*
 
