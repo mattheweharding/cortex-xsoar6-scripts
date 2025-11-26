@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # =================================================================
-# XSOAR Reset Script - v7 (Nested Data + Docker Reset)
+# XSOAR Reset Script - v8 (Nested Data + Aggressive Docker Reset)
 # TARGET: /var/lib/demisto/data
-# ACTION: Wipe DB + Logs + Restart Docker
+# ACTION: Wipe DB + Logs + Force Kill Docker Containers
 # =================================================================
 
 # 1. TARGET THE NESTED FOLDER
@@ -28,7 +28,7 @@ fi
 
 echo "⚠️  CRITICAL WARNING ⚠️"
 echo "Targeting Nested DB: $DATA_DIR"
-echo "This will restart XSOAR, restart Docker, and wipe all incidents."
+echo "This will restart XSOAR, FORCE KILL all Docker containers, and wipe incidents."
 echo ""
 read -p "Proceed? (yes/no): " confirm
 
@@ -46,6 +46,12 @@ if [ -n "$PID" ]; then
 fi
 
 echo "2️⃣  Stopping Docker containers..."
+# Aggressively kill running containers before stopping the service
+if [ -n "$(docker ps -q)" ]; then
+    echo "   - Killing running containers..."
+    docker kill $(docker ps -q)
+fi
+
 # We restart the docker daemon to flush all running containers
 service docker stop
 
